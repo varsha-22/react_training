@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core';
-import Input from '@material-ui/core/Input';
-
-
 class TextField extends Component {
    constructor(props){
       super(props);
@@ -19,13 +15,13 @@ class TextField extends Component {
       let val = event.target.value;
       let err = '';
       if(nam === 'age'){
-         if(val != "" && !Number(val)){
+         if(val !== "" && !Number(val)){
             err = <strong style ={{color: 'red'}}> Your age must be a number</strong>
          }
-         if(val != "" && val < 1 ){
+         if(val !== "" && val < 1 ){
             err = <strong style ={{color: 'red'}}> Age can not be below the 1</strong>
          }
-         if(val != "" && val > 100 ){
+         if(val !== "" && val > 100 ){
             err = <strong style ={{color: 'red'}}> Age can not be above the 100</strong>
          }
       }
