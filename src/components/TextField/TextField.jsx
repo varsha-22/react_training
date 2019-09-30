@@ -13,9 +13,7 @@ class TextField extends Component {
          'errmsg' : ''
       };
    }
-   
-   const classes = useStyeles();
-   
+
    textChangeHandler = (event) => {
       let nam = event.target.name;
       let val = event.target.value;
@@ -79,15 +77,5 @@ class TextField extends Component {
     )
   }
 }
-
-const useStyles = makeStyles(theme => ({
-   container: {
-     display: 'flex',
-     flexWrap: 'wrap',
-   },
-   input: {
-     margin: theme.spacing(1),
-   },
- })); 
 
 export default TextField;
