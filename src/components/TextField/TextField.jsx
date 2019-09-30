@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import Slider from '../Slider/Slider';
+import SimpleImageSlider from 'react-simple-image-slider';
 class TextField extends Component {
    constructor(props){
       super(props);
@@ -9,7 +11,6 @@ class TextField extends Component {
          'errmsg' : ''
       };
    }
-
    textChangeHandler = (event) => {
       let nam = event.target.name;
       let val = event.target.value;
@@ -29,9 +30,17 @@ class TextField extends Component {
       this.setState({errmsg: err});
       this.setState({[nam]: val});
    }
-//style={{backgroundColor: 'skyblue'}}
+   
   render() {
-
+     
+   const images  = [
+      { url: "images/cloud.jpg" },
+      { url: "images/dns-server-png" },
+      { url: "images/full-stack.jpg" },
+      { url: "images/js.jpg" },
+      { url: "images/load-balancer.png" },
+      { url: "images/default.png" },
+  ];
     const formStyle = {
       padding: "10px",
       fontFamily: "Arial"
@@ -55,6 +64,23 @@ class TextField extends Component {
     };
     return (
       <div>
+      <div>
+          <SimpleImageSlider
+            style={{ margin: "0 auto", marginTop: "50px" }}
+            width={896}
+            height={504}
+            images={images}
+            showBullets={this.state.showBullets}
+            showNavs={this.state.showNavs}
+            useGPURender={this.state.useGPURender}
+            navStyle={this.state.navStyle}
+            slideDuration={this.state.slideDuration}
+            onClickNav={this.onClickNav}
+            onClickBullets={this.onClickBullets}
+            onStartSlide={this.onStartSlide}
+            onCompleteSlide={this.onCompleteSlide}
+      />
+      </div>
         <form style={formStyle}>
         <h1 style={mystyle}>First React Task</h1>
         <h2> This is the Disable Input</h2>
