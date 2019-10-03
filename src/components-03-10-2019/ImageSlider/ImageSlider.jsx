@@ -1,4 +1,4 @@
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component } from 'react';
 import { default as images} from '../../images/index';
 
@@ -32,14 +32,14 @@ import { default as images} from '../../images/index';
         return (
         <div >
          <center>
-         <img style={imgStyle} src={this.state.banners[currentindex] } alt="description" />
+         <img style={divStyle} src={this.state.banners[currentindex]} />
          </center> 
         </div>
         )
     }
 }
 
-const imgStyle = {
+const divStyle = {
     height:'200px',
     width:'400px'
   }

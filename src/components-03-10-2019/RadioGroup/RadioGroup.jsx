@@ -25,7 +25,7 @@ class RadioGroups extends Component {
     return (
       <div>
       <label id='lbl1'>What do you do?</label>
-        <RadioGroup name="Cricket" value={this.state.value} onChange={this.handleChange}>
+        <RadioGroup id='radiogrp1' name="Cricket" value={this.state.value} onChange={this.handleChange}>
            <Radio value="wicket keeper" />Wicket Keeper
            <Radio value="batsman" />Batsman
            <Radio value="bowler" />Bowler
@@ -33,7 +33,7 @@ class RadioGroups extends Component {
         </RadioGroup>
 
         <label id='lbl2'>What do you do?</label>
-        <RadioGroup name="Football" value={this.state.value} onChange={this.handleChange}>
+        <RadioGroup id='radiogrp2' name="Football" value={this.state.value} onChange={this.handleChange}>
            <Radio value="defender" />Defender
            <Radio value="striker" />Striker
         </RadioGroup>
