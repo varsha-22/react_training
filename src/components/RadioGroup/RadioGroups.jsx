@@ -4,31 +4,7 @@ import React, { Component } from 'react'
 import { RadioGroup, Radio } from 'react-radio-group';
 
 class RadioGroups extends Component {
-  // constructor(){
-  //   super();
-  //   this.state={
-  //     value: '',
-  //     name:''
-  //   }
-
-  // }
-
-  // selectedValue = (event) => {
-  //   this.setState({value: event.target.value});
-  // }
-
-  // selectedValue1 = (event) => {
-  //   this.setState({value: event.target.value});
-  // }
-
-  // handleChange = e => {
-  //   const { name, value } = e.target;
-
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
-  render() {
+render() {
     console.log(this.props);
     if(this.props.name1 === 'group1'){
       return(
@@ -53,17 +29,7 @@ class RadioGroups extends Component {
         </div>
 
       )
-    }
-    //return (
-      // <div>
-      //   {this.props.cricket.map((item,index) => (
-      //     <RadioGroup name={this.props.cricket} onChange={this.props.onChange}>
-      //       <Radio value={item} />{item}
-      //     </RadioGroup>
-      //   ))}
-      // </div>
-      // <div>
-    
+    }   
   }
 }
 

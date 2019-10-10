@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-
 import ImageSlider from '../../components/ImageSlider/ImageSlider';
-import SelectField from '../../components/SelectField/SelectField';
 import TextField from '../../components/TextField/TextField';
-
+import { inputstyle, formStyle, mystyle, imgStyle } from '../../components/TextField/style';
 class TextFieldDemo extends Component {
    constructor(props){
       super(props);
@@ -25,25 +23,6 @@ class TextFieldDemo extends Component {
          
       }
    }
-
-
-  onChangeHandle = event => {
-   this.setState({
-     [event.target.name]: event.target.value
-   });
-   // eslint-disable-next-line react/no-direct-mutation-state
-   this.state.isEnabled = true;
- }
-
- handleButton = (event) => {
-   if(this.state.name === ''){
-     alert('Name field is required');
-   }else{
-       alert('Form submitted Successfully');
-   }
-       
- }
- 
 
    textChangeHandler = (event) => {
       let nam = event.target.name;
@@ -80,41 +59,11 @@ class TextFieldDemo extends Component {
       this.setState({[nam]: val});
    }
   render() { 
-   // console.log('state', this.state);
    
-   
-   const inputstyle = {
-      width: "75%",
-      padding: "12px 20px",
-      margin: "8px 0",
-      boxSizing: "border-box",
-      borderRadius: "4px"
-      };      
-
-   const formStyle = {
-      padding: "10px",
-      fontFamily: "Arial"
-    };
-    const mystyle = {
-      width: "100%",
-      padding: "12px 20px",
-      margin: "8px 0",
-      color: "Black",
-      fontFamily: "Western"
-
-    }; 
-
     return (
       <div>
         <form style={formStyle}>
-        <SelectField onChangeSelect={this.onChangeHandle} 
-        sports={this.state.sports}
-        isEnabled={this.state.isEnabled}
-        handleButton={this.handleButton}
-        cricket={this.state.cricket}
-        football={this.state.football}
-        name={this.state.name} />
-        <ImageSlider/>
+        <ImageSlider style={imgStyle}/>
         <h1 style={mystyle}>First React Task</h1>
         <h2> This is the Disable Input</h2>
         <TextField type='text' name='disable'
