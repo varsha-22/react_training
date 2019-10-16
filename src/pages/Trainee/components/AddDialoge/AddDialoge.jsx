@@ -19,7 +19,6 @@ export default class Trainee extends React.Component {
   }
 
   componentDidMount() {
-    // custom rule will have name 'isPasswordMatch'
     ValidatorForm.addValidationRule("isPasswordMatch", value => {
       const { formData } = this.state;
       if (value !== formData.password) {
