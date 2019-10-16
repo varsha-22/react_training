@@ -1,16 +1,14 @@
-import React from 'react';
-import NavBar from './layouts/components/Navbar/NavBar';
-import AuthLayout from './routes/AuthRoute';
-import PrivateRoute from './routes/PrivateRoute';
-
-function App() {
+import React from "react";
+// import TraineeList from './pages/Trainee/TraineeList';
+import Routes from "./routes/Routes";
+import SnackBarProvider from "./SnackBarProvider/SnackBarProvider";
+const App = () => {
   return (
     <div>
-    <NavBar></NavBar>
-    <AuthLayout></AuthLayout>
-    <PrivateRoute></PrivateRoute>
+      <Routes />
+      <SnackBarProvider />
     </div>
-      );
+  );
 }
 
 export default App;
