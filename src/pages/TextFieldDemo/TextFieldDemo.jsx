@@ -30,10 +30,10 @@ class TextFieldDemo extends Component {
   }
 
   textChangeHandler = event => {
-    let nam = event.target.name;
+    let name = event.target.name;
     let val = event.target.value;
     let err = "";
-    if (nam === "age") {
+    if (name === "age") {
       if (val !== "" && !Number(val)) {
         err = <strong style={strStyle}> Your age must be a number</strong>;
       }
@@ -45,22 +45,20 @@ class TextFieldDemo extends Component {
       }
     }
 
-    this.setState({ errmsg: err });
-    this.setState({ [nam]: val });
+    this.setState({ errmsg: err , [name]: val});
   };
 
   erroMsgHandler = event => {
-    let nam = event.target.name;
+    let name = event.target.name;
     let val = event.target.value;
     let err = "";
-    if (nam === "name") {
+    if (name === "name") {
       if (val !== "" && Number(val)) {
         err = <strong style={strStyle}> Please Enter A Valid Name</strong>;
       }
     }
 
-    this.setState({ errmsg: err });
-    this.setState({ [nam]: val });
+    this.setState({ errmsg: err , [name]: val});
   };
   render() {
     const { isDisabled, errmsg } = this.state;
