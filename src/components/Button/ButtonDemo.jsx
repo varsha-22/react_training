@@ -1,13 +1,15 @@
-// eslint-disable-next-line no-unused-vars
-import React, { Component } from 'react'
-import { buttonStyle } from '../TextField/style';
-export default class ButtonDemo extends Component {
-  render() {
-    return (
-      <div>    
-        <button style={buttonStyle} >Cancle</button> 
-        <button style={buttonStyle}  disabled={!(this.props.isEnabled)} onClick={this.props.onClick}> Submit</button>
+import React from "react";
+import { buttonStyle } from "../TextField/style";
+const ButtonDemo = props => {
+  const { isEnabled, onClick } = props;
+  return (
+    <div>
+      <button style={buttonStyle}>Cancle</button>
+      <button style={buttonStyle} disabled={!isEnabled} onClick={onClick}>
+        {" "}
+        Submit
+      </button>
     </div>
-    )
-  }
-}
+  );
+};
+export default ButtonDemo;
