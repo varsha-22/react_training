@@ -4,7 +4,6 @@ class TextField extends Component {
   
   render() {
     const { isError, ...rest } = this.props;
-    console.log('Error', isError);
     return (
       <div>
       <input {...rest} style={this.props.style} />

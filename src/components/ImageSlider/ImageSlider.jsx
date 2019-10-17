@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Component } from 'react';
 import { default as images} from '../../images/index';
-
  class ImageSlider extends Component {
     constructor(props){
         super(props)
@@ -32,18 +31,12 @@ import { default as images} from '../../images/index';
         return (
         <div >
          <center>
-         <img style={imgStyle} src={this.state.banners[currentindex] } alt="description" />
+         <img style={this.props.style} src={this.state.banners[currentindex] } alt="description" />
          </center> 
         </div>
         )
     }
 }
-
-const imgStyle = {
-    height:'200px',
-    width:'400px'
-  }
   
-
 
 export default ImageSlider;
