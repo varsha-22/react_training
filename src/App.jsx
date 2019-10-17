@@ -1,11 +1,13 @@
 import React from 'react';
-import TextField from './components/TextField/TextField'
+//import TextField from './components/TextField/TextField'
+//import SelectField from './components/SelectField/SelectField';
+//import ImageSlider from './components/ImageSlider/ImageSlider';
+import TextFieldDemo from './pages/TextFieldDemo/TextFieldDemo';
 
 function App() {
   return (
     <div>
-	<h2>Test</h2>
-    <TextField />
+    <TextFieldDemo />
     </div>
   );
 }
