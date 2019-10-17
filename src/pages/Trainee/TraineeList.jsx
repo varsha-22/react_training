@@ -90,6 +90,7 @@ class TraineeList extends Component {
   }
 
   render() {
+    const { editIdx, columnToSort, sortDirection, offset } = this.state;
     return (
       <div>
         <div>
@@ -134,12 +135,12 @@ class TraineeList extends Component {
             handleSort={this.handleSort}
             handleRemove={this.handleRemove}
             startEditing={this.startEditing}
-            editIdx={this.state.editIdx}
+            editIdx={editIdx}
             stopEditing={this.stopEditing}
             handleChange={this.handleChange}
-            columnToSort={this.state.columnToSort}
-            sortDirection={this.state.sortDirection}
-            offset={this.state.offset}
+            columnToSort={columnToSort}
+            sortDirection={sortDirection}
+            offset={offset}
             total={100}
             onClickPage={(e, offset) => this.handleClick(offset)}
           />
