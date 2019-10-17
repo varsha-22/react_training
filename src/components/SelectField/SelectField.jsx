@@ -16,7 +16,7 @@ class SelectField extends Component {
         // eslint-disable-next-line no-unreachable
         break;
       default:
-        return <p></p>;
+        return '';
     }
   }
 
