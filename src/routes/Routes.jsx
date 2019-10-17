@@ -12,7 +12,6 @@ import NoMatch from "../pages/NoMatch/NoMatch";
 const Routes = () => {
   return (
     <Router>
-      <div>
         <Switch>
           <PrivateRoute path="/trainee" component={Trainee} />
           <PrivateRoute path="/textFieldDemo" component={TextFieldDemo} />
@@ -23,7 +22,6 @@ const Routes = () => {
           <PublicRoute path="/login" component={Login} />
           <Route path="*" exact={true} component={NoMatch} />
         </Switch>
-      </div>
     </Router>
   );
 };
