@@ -14,11 +14,7 @@ export default class Math extends Component {
   }
   handleResultButton = event => {
     event.preventDefault();
-    const { result, first, second, operator } = this.state;
-    let finalResult = result;
-    const firstNo = first;
-    const secondNo = second;
-    const operatorPicked = operator;
+    let { result: finalResult, first: firstNo , second: secondNo, operator: operatorPicked } = this.state;
     if (operatorPicked === "+") {
       finalResult = Number(firstNo) + Number(secondNo);
     } else if (operatorPicked === "-") {
