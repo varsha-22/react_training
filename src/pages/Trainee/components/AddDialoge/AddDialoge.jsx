@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SnackBarProvider from "../../../../SnackBarProvider/SnackBarProvider";
+import API from "../../../../lib/utils/api";
 export default class Trainee extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ export default class Trainee extends React.Component {
       submitted: false,
       success: false
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -48,11 +50,29 @@ export default class Trainee extends React.Component {
     this.setState({ formData });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async event => {
+    event.preventDefault();
+    API.interceptors.request.use(config => {
+      const auth_token = localStorage.getItem("token");
+      if (auth_token) {
+        config.headers.Authorization = auth_token;
+      }
+      return config;
+    });
+
+    const { formData } = this.state;
+    const name = formData.name;
+    const email = formData.email;
+    const password = formData.password;
+    await API.post("/trainee", {
+      name,
+      email,
+      password
+    });
     this.setState({ submitted: true }, () => {
       setTimeout(() => this.setState({ submitted: false }), 5000);
     });
-    this.setState({ success: true });
+    this.setState({ success: true }, () => this.props.modalIsOpen);
   };
 
   handleCancel = () => {
@@ -96,7 +116,7 @@ export default class Trainee extends React.Component {
 
   render() {
     const classes = this.useStyles;
-    const { formData, submitted } = this.state;
+    const { formData, submitted, success } = this.state;
 
     return (
       <div className={classes.container}>
@@ -162,10 +182,7 @@ export default class Trainee extends React.Component {
             value={formData.repeatPassword}
           />
           <br />
-          <SnackBarProvider
-            submitted={submitted}
-            success={this.state.success}
-          />
+          <SnackBarProvider submitted={submitted} success={success} />
           <Button
             variant="outlined"
             className={classes.button}

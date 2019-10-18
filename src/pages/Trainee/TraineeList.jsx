@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import trainees from "./components/data/trainee";
-import Link from "@material-ui/core/Link";
-import UserTable from "../Trainee/UserTable";
-import orderBy from "lodash/orderBy";
-import TraineeDetails from "./TraineeDetails";
 import { Route } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import orderBy from "lodash/orderBy";
+import React, { Component } from "react";
+import API from "../../lib/utils/api";
+import TraineeDetails from "./TraineeDetails";
+import trainees from "./components/data/trainee";
+import UserTable from "../Trainee/UserTable";
 
 const invertDirection = {
   asc: "desc",
@@ -14,43 +15,29 @@ class TraineeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-          id: "5c6c47af7740654f0915fac9",
-          name: "Sachin Tendulkar",
-          email: "sachin@gmail.com",
-          createdAt: "2019-02-10T18:15:11.778Z"
-        },
-        {
-          id: "5c6c47af7740654f0455fac9",
-          name: "Virat Kohli",
-          email: "virat@gmail.com",
-          createdAt: "2019-02-12T18:15:11.778Z"
-        },
-        {
-          id: "5c6567af7740654f0915fac9",
-          name: "M.S. Dhoni",
-          email: "msdhoni@gmail.com",
-          createdAt: "2019-02-13T18:15:11.778Z"
-        },
-        {
-          id: "5c6c47af7747854f0915fac9",
-          name: "Rohit Sharma",
-          email: "rohit.sharma",
-          createdAt: "2019-02-14T18:15:11.778Z"
-        },
-        {
-          id: "5c6c47af7740654f0915876c9",
-          name: "Bumrah",
-          email: "bumhrah@gmail.com",
-          createdAt: "2019-02-15T18:15:11.778Z"
-        }
-      ],
+      data: [],
       editIdx: -1,
       columnToSort: "",
       sortDirection: "desc",
-      offset: 0
+      offset: 0,
+      limit: 10
     };
+  }
+
+  componentDidMount() {
+    API.interceptors.request.use(config => {
+      const auth_token = localStorage.getItem("token");
+      if (auth_token) {
+        config.headers.Authorization = auth_token;
+      }
+      return config;
+    });
+    API.get(
+      `/trainee?limit=${this.state.limit}&skip=${this.state.offset}`
+    ).then(res => {
+      const data = res.data.data.records;
+      this.setState({ data });
+    });
   }
   handleRemove = i => {
     this.setState(state => ({
@@ -73,6 +60,14 @@ class TraineeList extends Component {
         j === i ? { ...row, [name]: value } : row
       )
     }));
+    const { offset, limit } = this.state;
+    let skip = parseInt(offset + 10);
+    let url = `/trainee?limit=${limit}&skip=${skip}`;
+    API.get(url).then(res => {
+      const data = res.data.data.records;
+      this.setState({ data });
+    });
+    this.setState({ offset: skip });
   };
 
   handleSort = columnName => {
@@ -90,11 +85,12 @@ class TraineeList extends Component {
   }
 
   render() {
+    const { editIdx, columnToSort, sortDirection, offset } = this.state;
     return (
       <div>
         <div>
           {trainees.map((trainee, i) => (
-            <ul>
+            <ul key={trainee.id}>
               <li>
                 {" "}
                 <Link
@@ -134,12 +130,12 @@ class TraineeList extends Component {
             handleSort={this.handleSort}
             handleRemove={this.handleRemove}
             startEditing={this.startEditing}
-            editIdx={this.state.editIdx}
+            editIdx={editIdx}
             stopEditing={this.stopEditing}
             handleChange={this.handleChange}
-            columnToSort={this.state.columnToSort}
-            sortDirection={this.state.sortDirection}
-            offset={this.state.offset}
+            columnToSort={columnToSort}
+            sortDirection={sortDirection}
+            offset={offset}
             total={100}
             onClickPage={(e, offset) => this.handleClick(offset)}
           />

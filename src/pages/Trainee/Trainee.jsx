@@ -12,7 +12,7 @@ export default class Trainee extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
     };
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -54,7 +54,7 @@ export default class Trainee extends React.Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <AddDialoge />
+          <AddDialoge modalIsOpen={this.closeModal}/>
         </Modal>
         <TraineeList/>
       </div>

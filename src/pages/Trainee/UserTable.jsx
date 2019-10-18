@@ -36,7 +36,7 @@ const row = (
 ) => {
   const currentlyEditing = editIdx === i;
   return (
-    <TableRow key={`tr-${i}`} selectable={false}>
+    <TableRow key={`tr-${i}`}>
       {header.map((y, k) => (
         <TableCell key={`trc-${k}`}>
           {currentlyEditing ? (
@@ -121,7 +121,7 @@ export default ({
         limit={10}
         offset={offset}
         total={total}
-        onClick={onClickPage}
+        onClick={handleChange}
       />
     </Paper>
   );

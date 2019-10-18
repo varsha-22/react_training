@@ -4,16 +4,20 @@ import { Route } from "react-router-dom";
 import LoginLayout from "../layouts/LoginLayout";
 
 const PublicRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={matchProps => (
-        <LoginLayout>
-          <Component {...matchProps} />
-        </LoginLayout>
-      )}
-    />
-  );
+  const auth_token = localStorage.getItem("token");
+
+  if (auth_token !== "") {
+    return (
+      <Route
+        {...rest}
+        render={matchProps => (
+          <LoginLayout>
+            <Component {...matchProps} />
+          </LoginLayout>
+        )}
+      />
+    );
+  }
 };
 
 export default PublicRoute;

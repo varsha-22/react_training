@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../../layouts/components/Footer/Footer";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -39,8 +40,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
+  const {
+    loading,
+    fetchData,
+    handlePwdChange,
+    handleEmailChange,
+    email,
+    password,
+    loggedIn
+  } = props;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -52,7 +62,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -60,8 +70,9 @@ export default function Login() {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name={email}
             autoComplete="email"
+            onChange={handleEmailChange}
             autoFocus
           />
           <TextField
@@ -69,11 +80,12 @@ export default function Login() {
             margin="normal"
             required
             fullWidth
-            name="password"
+            name={password}
             label="Password"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handlePwdChange}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -85,8 +97,19 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={loading}
+            onClick={fetchData}
           >
-            Sign In
+            {loading && (
+              <i
+                className="fa fa-refresh fa-spin"
+                style={{ marginRight: "5px" }}
+              />
+            )}
+            {loading && <span>Loading</span>}
+            {!loading && <span>Sing In</span>}
+
+            {loggedIn && <Redirect to="/trainee" />}
           </Button>
           <Grid container>
             <Grid item xs>
