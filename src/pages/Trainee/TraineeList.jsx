@@ -39,14 +39,28 @@ class TraineeList extends Component {
       this.setState({ data });
     });
   }
+
   handleRemove = i => {
     this.setState(state => ({
       data: state.data.filter((row, j) => j !== i)
     }));
+    const data = this.state.data;
+    const id = data[i].originalId;
+    API.delete(`/trainee/:${id}`, { id }).then(res => console.log(res.data));
   };
 
   startEditing = i => {
     this.setState({ editIdx: i });
+    const data = this.state.data;
+
+    const id = data[i].originalId;
+    const name = data[i].name;
+    const email = data[i].email;
+    API.put("/trainee", {
+      id,
+      name,
+      email
+    }).then(res => console.log(res.data));
   };
 
   stopEditing = () => {
@@ -125,6 +139,10 @@ class TraineeList extends Component {
               {
                 name: "Email",
                 prop: "email"
+              },
+              {
+                name: "Role",
+                prop: "role"
               }
             ]}
             handleSort={this.handleSort}
